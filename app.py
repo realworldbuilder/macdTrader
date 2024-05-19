@@ -60,6 +60,22 @@ candle_type = st.sidebar.radio('Select Candle Type', ['Daily', 'Weekly'])
 # Set interval based on candle type
 interval = '1d' if candle_type == 'Daily' else '1wk'
 
+# Educational content
+with st.sidebar.expander("Learn about MACD and RSI"):
+    st.write("""
+    **MACD (Moving Average Convergence Divergence):**
+    - The MACD is a trend-following momentum indicator that shows the relationship between two moving averages of a security’s price.
+    - It is calculated by subtracting the 26-period Exponential Moving Average (EMA) from the 12-period EMA.
+    - A 9-period EMA of the MACD, called the "Signal Line," is plotted on top of the MACD line, which can act as a trigger for buy and sell signals.
+    - When the MACD crosses above the Signal Line, it is a bullish signal, indicating that it may be time to buy.
+    - When the MACD crosses below the Signal Line, it is a bearish signal, indicating that it may be time to sell.
+
+    **RSI (Relative Strength Index):**
+    - The RSI measures the speed and change of price movements.
+    - RSI values range from 0 to 100. Traditionally, RSI is considered overbought when above 70 and oversold when below 30.
+    - It can be used to identify general market trends and potential reversal points.
+    """)
+
 if ticker:
     # Fetch stock data
     data = get_stock_data(ticker, period=period, interval=interval)
