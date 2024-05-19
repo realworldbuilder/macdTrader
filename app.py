@@ -54,11 +54,11 @@ ticker = st.sidebar.text_input('Enter Stock Symbol', value='AAPL')
 # Sidebar input for time frame
 period = st.sidebar.selectbox('Select Time Frame', ['1y', '2y', '5y', '10y'])
 
-# Sidebar input for candle type
-candle_type = st.sidebar.radio('Select Candle Type', ['Daily', 'Weekly'])
+# Sidebar input for chart type
+chart_type = st.sidebar.radio('Select Chart Type', ['Daily', 'Weekly'])
 
-# Set interval based on candle type
-interval = '1d' if candle_type == 'Daily' else '1wk'
+# Set interval based on chart type
+interval = '1d' if chart_type == 'Daily' else '1wk'
 
 # Educational content
 with st.sidebar.expander("Learn about MACD and RSI"):
@@ -93,10 +93,8 @@ if ticker:
                             subplot_titles=('Stock Price', 'MACD', 'RSI'),
                             row_width=[0.2, 0.2, 0.6])
 
-        # Candlestick chart
-        fig.add_trace(go.Candlestick(x=data.index, open=data['Open'], high=data['High'],
-                                     low=data['Low'], close=data['Close'], name='Candlestick'),
-                      row=1, col=1)
+        # Line chart for stock price
+        fig.add_trace(go.Scatter(x=data.index, y=data['Close'], mode='lines', name='Stock Price'), row=1, col=1)
 
         # MACD chart
         fig.add_trace(go.Scatter(x=data.index, y=data['MACD'], mode='lines', name='MACD'), row=2, col=1)
